@@ -1,6 +1,31 @@
 var data;
 
 
+
+var db;
+var storage;
+var storageRef;
+
+var app = firebase.initializeApp(config);
+db = firebase.firestore(app);
+storage = firebase.storage();
+storageRef = storage.ref();
+
+firebase.auth(app).onAuthStateChanged(function (user) {
+    if (user) {
+
+        alert(user.uid);
+
+        var uidUser = user.uid.to.String();
+    } else {
+      window.location = "login.html";
+    }
+  });
+
+
+
+
+
 function findByUser(id) {
     var docRef = db.collection("APP_USER_DEFAULT").doc(id);
     docRef.get().then(function (doc) {
