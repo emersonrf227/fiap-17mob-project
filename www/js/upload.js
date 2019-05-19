@@ -1,26 +1,33 @@
 var data;
-
-
-
 var db;
 var storage;
 var storageRef;
 
-var app = firebase.initializeApp(config);
+
 db = firebase.firestore(app);
 storage = firebase.storage();
 storageRef = storage.ref();
 
-firebase.auth(app).onAuthStateChanged(function (user) {
-    if (user) {
 
-        alert(user.uid);
 
-        var uidUser = user.uid.to.String();
-    } else {
-      window.location = "login.html";
-    }
-  });
+function dadosUser(){
+
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+        var uid = user.uid;
+        uploadFirebase(user)
+        } else {
+          window.location = "login.html";
+        }
+      });
+
+      
+    
+
+
+}
+
+
 
 
 
@@ -47,13 +54,15 @@ function findByUser(id) {
     });
 }
 
-function uploadFirebase() {
+function uploadFirebase(user) {
+
+    var uid = user.uid;
 
     var image = document.getElementById("image").src;
     if (image.indexOf('base64') !== -1) {
 
         // File or Blob named mountains.jpg
-        var filename = "Emerson.jpg"
+        var filename = uid+"avatar.jpg"
         var file = dataURLtoFile(image, filename);
 
         // Create the file metadata

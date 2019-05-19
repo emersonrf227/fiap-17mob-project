@@ -10,3 +10,5 @@ var storage;
     storageBucket: "radio-f7556.appspot.com",
     messagingSenderId: "607843645174"
   };
+
+  var app = firebase.initializeApp(config);
