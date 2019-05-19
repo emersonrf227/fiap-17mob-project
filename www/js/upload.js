@@ -174,23 +174,3 @@ return new File([u8arr], filename, {
 });
 }
 
-function findByUser(id) {
-    var docRef = db.collection("APP_USER_DEFAULT").doc(id);
-    docRef.get().then(function (doc) {
-        if (doc.exists) {
-            $('#inputEmail').val(doc.data().email);
-            $('#inputName').val(doc.data().name);
-            $('#inputPhone').val(doc.data().phone);
-            if (doc.data().avatar) {
-                $('#image').attr('src', doc.data().avatar);
-            }
-            data = doc.data();
-        } else {
-            console.log("No such document!");
-        }
-        waitingDialog.hide();
-    }).catch(function (error) {
-        waitingDialog.hide();
-        console.log("Error getting document:", error);
-    });
-}
