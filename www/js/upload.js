@@ -136,15 +136,17 @@ db.collection("DadosUsers").doc(id).set({
     avatar: avatar,
     //create: create,
     update: new Date
-})
-.then(function(docRef) {
-    waitingDialog.hide();
-    console.log("Document ok update");
+}).then(function(docRef) {
+    console.log("Document written with ID: ", docRef.id);
+    window.location="dashboard.html";
 })
 .catch(function(error) {
-    waitingDialog.hide();
-    console.log("Error writing document: ", error);
+    console.error("Error adding document: ", error);
+    window.location="dashboard.html";
 });
+
+
+
 
     }
 
